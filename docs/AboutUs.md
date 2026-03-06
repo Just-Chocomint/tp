@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Project Advisor
 * Responsibilities: UI/logic
 
-### Jane Doe
+### Dylan Yeo
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/dylanyeo20.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](https://github.com/dylanyeo20)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Logic 
 
 ### Johnny Doe
 
