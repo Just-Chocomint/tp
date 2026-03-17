@@ -67,6 +67,10 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
 
         if (command instanceof DeleteCommand) {
+            DeleteCommand deleteCommand = (DeleteCommand) command;
+            if (!deleteCommand.isValidTarget(model)) {
+                throw new CommandException(deleteCommand.getNotFoundMessage());
+            }
             pendingCommand = command;
             return new CommandResult("Are you sure you want to delete this contact? (y/n)");
         }

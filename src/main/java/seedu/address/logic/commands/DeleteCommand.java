@@ -46,6 +46,22 @@ public class DeleteCommand extends Command {
         throw new CommandException(String.format(MESSAGE_PHONE_NOT_FOUND, targetPhone));
     }
 
+    public boolean isValidTarget(Model model) {
+        requireNonNull(model);
+
+        List<Person> fullList = model.getAddressBook().getPersonList();
+
+        for (Person person : fullList) {
+            if (person.getPhone().equals(targetPhone)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getNotFoundMessage() {
+        return String.format(MESSAGE_PHONE_NOT_FOUND, targetPhone);
+    }
 
     @Override
     public boolean equals(Object other) {
