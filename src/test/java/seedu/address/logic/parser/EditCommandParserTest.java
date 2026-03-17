@@ -214,7 +214,18 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + " d/";
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
 
-        // empty details - should not set details (keep original) but should still be considered "edited"
+        // empty details - should throw validation exception
+        assertThrows(ParseException.class, "Details can take any values, and it should not be blank", () ->
+                parser.parse(userInput));
+    }
+
+    @Test
+    public void parse_blankDetails_throwsParseException() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + " d/ ";
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+
+        // blank details - should throw validation exception
         assertThrows(ParseException.class, "Details can take any values, and it should not be blank", () ->
                 parser.parse(userInput));
     }

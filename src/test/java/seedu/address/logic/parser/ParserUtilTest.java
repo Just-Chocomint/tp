@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Details;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -192,5 +193,17 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseDetails_noDetails_returnsDetails() throws Exception {
+        Details actualDetails = ParserUtil.parseDetails("No details");
+        assertEquals("No details", actualDetails.value);
+    }
+
+    @Test
+    public void parseDetails_validDetails_returnsDetails() throws Exception {
+        Details actualDetails = ParserUtil.parseDetails("Valid details");
+        assertEquals("Valid details", actualDetails.value);
     }
 }
