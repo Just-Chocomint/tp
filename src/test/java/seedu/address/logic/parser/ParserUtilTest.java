@@ -206,4 +206,9 @@ public class ParserUtilTest {
         Details actualDetails = ParserUtil.parseDetails("Valid details");
         assertEquals("Valid details", actualDetails.value);
     }
+
+    @Test
+    public void parseDetails_invalidDetails_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDetails(""));
+    }
 }

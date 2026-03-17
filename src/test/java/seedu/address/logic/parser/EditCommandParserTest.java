@@ -229,4 +229,14 @@ public class EditCommandParserTest {
         assertThrows(ParseException.class, "Details can take any values, and it should not be blank", () ->
                 parser.parse(userInput));
     }
+
+    @Test
+    public void parse_validDetails_success() throws Exception {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        String userInput = targetIndex.getOneBased() + " d/Valid details";
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withDetails("Valid details").build();
+
+        assertParseSuccess(parser, userInput, new EditCommand(targetIndex, descriptor));
+    }
 }
