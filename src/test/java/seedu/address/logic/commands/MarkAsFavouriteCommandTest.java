@@ -92,6 +92,7 @@ public class MarkAsFavouriteCommandTest {
         MarkAsFavouriteCommand different = new MarkAsFavouriteCommand(Index.fromOneBased(2));
         Object otherObject = new ArrayList<>();
 
+        assertTrue(sameOne.equals(sameOne));
         assertTrue(sameOne.equals(sameTwo));
         assertFalse(sameOne.equals(different));
         assertFalse(sameOne.equals(otherObject));
