@@ -74,12 +74,10 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsSubstringIgnoreCase("Amy Anderson", "Amy")); // Substring at start
         assertTrue(StringUtil.containsSubstringIgnoreCase("Amy Anderson", "son")); // Substring at end
         assertTrue(StringUtil.containsSubstringIgnoreCase("Amy Anderson", "derso")); // Substring in middle
-        
         // Case insensitive
         assertTrue(StringUtil.containsSubstringIgnoreCase("AMY ANDERSON", "ers"));
         assertTrue(StringUtil.containsSubstringIgnoreCase("Amy Anderson", "ANDERSON"));
         assertTrue(StringUtil.containsSubstringIgnoreCase("amy anderson", "AMY"));
-        
         // Substring not found
         assertFalse(StringUtil.containsSubstringIgnoreCase("Amy Anderson", "xyz"));
         assertFalse(StringUtil.containsSubstringIgnoreCase("Amy Anderson", "bob"));
