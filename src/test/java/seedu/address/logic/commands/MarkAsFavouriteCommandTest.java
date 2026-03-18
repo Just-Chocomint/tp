@@ -78,4 +78,6 @@ public class MarkAsFavouriteCommandTest {
                 String.format(MarkAsFavouriteCommand.MESSAGE_MARK_PERSON_SUCCESS, personToEdit.getName()),
                 testModel);
     }
+
+
 }

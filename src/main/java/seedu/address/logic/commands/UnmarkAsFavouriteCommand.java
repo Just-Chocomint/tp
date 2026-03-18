@@ -91,4 +91,17 @@ public class UnmarkAsFavouriteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS,
                 markedPerson.getName()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UnmarkAsFavouriteCommand otherCommand)) {
+            return false;
+        }
+
+        return index.equals(otherCommand.index);
+    }
 }

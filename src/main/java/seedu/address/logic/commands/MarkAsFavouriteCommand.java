@@ -93,4 +93,17 @@ public class MarkAsFavouriteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_MARK_PERSON_SUCCESS,
                 markedPerson.getName()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof MarkAsFavouriteCommand otherCommand)) {
+            return false;
+        }
+
+        return index.equals(otherCommand.index);
+    }
 }
