@@ -66,7 +66,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'CLIentTracker-1.3.0.jar'
 }
 
 defaultTasks 'clean', 'test'
