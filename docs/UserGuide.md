@@ -153,31 +153,59 @@ Examples:
 
 Finds persons whose names or phone numbers contain the given keywords.
 
-Format:
-* Name search: `find KEYWORD [MORE_KEYWORDS]`
+Format Examples:
+* General search: `find KEYWORD`
+* Name search: `find n/NAME_KEYWORD`
 * Phone search: `find p/PHONE_NUMBER`
+* Address search: `find a/ADDRESS_KEYWORD`
+* Email search: `find e/EMAIL_KEYWORD`
 
-**For name search:**
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+**For general search:**
+* Searches across **name, phone, address, email, and details**.
+* The search is case-insensitive. e.g. `alex` will match `Alex`
+* Partial matches are supported. e.g. `lex` will match `Alex`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `find alex` will return persons whose fields contain `alex`
 
-**For phone search (using `p/` prefix):**
-* Searches by phone number instead of name.
-* Supports partial phone number matching. e.g. `find p/9876` will match `98765432`, `98760000`, etc.
-* Only a single phone number search is supported per command.
+**For field-specific search (using prefixes):**
+* Searches only within the specified field.
+* The search is case-insensitive.
+* Partial matches are supported for all fields.
+* Keywords within the same field are matched using **OR** logic.
+  e.g. `find n/Alex John` returns persons whose **name** contains `Alex` or `John`
+* Different fields can be combined and are matched using **AND** logic.
+  e.g. `find n/Alex p/9123` returns persons whose **name** contains `Alex` and whose **phone** contains `9123`
 
-Examples (Name Search):
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+**Supported prefixes:**
+* `n/` — name
+* `p/` — phone
+* `a/` — address
+* `e/` — email
+* `d/` — details
 
-Examples (Phone Search):
-* `find p/98765432` returns all persons with phone number containing `98765432`
-* `find p/9876` returns all persons with phone numbers containing `9876`
+**Prefix behavior:**
+* Once a prefix is used, all following unprefixed keywords are treated as belonging to that same field until another prefix appears.
+* e.g. `find n/Alex Bob` searches for persons whose **name** contains `Alex` or `Bob`
+* e.g. `find n/Alex p/9123 Bob` searches for persons whose **name** contains `Alex`, and whose **phone** contains `9123` or `Bob`
+
+Examples (General Search):
+* `find alex` returns persons whose fields contain `alex`
+* `find friend` returns persons whose fields contain `friend`
+
+Examples (Field-Specific Search):
+* `find n/Alex David` returns persons whose name contains `Alex David`
+* `find p/91032182 8743` returns persons whose phone contains `91032182 8743`
+* `find a/Serangoon Geylang` returns persons whose address contains `Serangoon Geylang`
+* `find e/example.com` returns persons whose email contains `example.com`
+* `find d/friend` returns persons whose details contain `friend`
+ ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+
+Examples (Combined Search):
+* `find n/Alex p/9123` returns persons whose name contains `Alex` and phone contains `9123`
+* `find alex p/9876` returns persons whose fields contain `alex` and whose phone contains `9876`
+* `find n/Alex Bob d/friend close` returns persons whose name contains `Alex` or `Bob`, and whose details contain `friend` or `close`
+
 
 ### Deleting a person : `delete`
 
