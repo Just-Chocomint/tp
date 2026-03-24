@@ -4,6 +4,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Represents a meeting scheduled with a person.
@@ -15,7 +19,10 @@ public class Meeting {
     public static final String MESSAGE_MEETING_DATETIME_CONSTRAINTS = "Meeting date and time must be"
             + "valid and not in the past";
 
-    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a");
+    private static final DateTimeFormatter DISPLAY_FORMATTER = new DateTimeFormatterBuilder()
+            .appendPattern("dd MMM yyyy h:mm ")
+            .appendText(ChronoField.AMPM_OF_DAY, Map.of(0L, "am", 1L, "pm"))
+            .toFormatter(Locale.ENGLISH);
 
     private final LocalDateTime dateTime;
 
