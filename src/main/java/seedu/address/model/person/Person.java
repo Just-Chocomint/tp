@@ -2,9 +2,12 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -26,13 +29,28 @@ public class Person {
     private final Details details;
     private final Set<Tag> tags = new HashSet<>();
     private final boolean isFavourite;
+    private final LocalDate meetingDate;
+    private final LocalTime meetingTime;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
                   Details details, Set<Tag> tags, boolean isFavourite) {
+        this(name, phone, email, address, details, tags, isFavourite, null, null);
+    }
+
+    /**
+     * Every non-meeting field must be present and not null. Meeting date/time are optional,
+     * but must either both be present or both be absent.
+     */
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Details details, Set<Tag> tags, boolean isFavourite,
+                  LocalDate meetingDate, LocalTime meetingTime) {
         requireAllNonNull(name, phone, email, address, details, tags);
+        if ((meetingDate == null) != (meetingTime == null)) {
+            throw new IllegalArgumentException("Meeting date and time must either both be present or both be absent.");
+        }
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -40,6 +58,8 @@ public class Person {
         this.details = details;
         this.tags.addAll(tags);
         this.isFavourite = isFavourite;
+        this.meetingDate = meetingDate;
+        this.meetingTime = meetingTime;
     }
 
     public Name getName() {
@@ -67,6 +87,27 @@ public class Person {
     }
 
     /**
+     * Returns the scheduled meeting date, if one has been assigned.
+     */
+    public Optional<LocalDate> getMeetingDate() {
+        return Optional.ofNullable(meetingDate);
+    }
+
+    /**
+     * Returns the scheduled meeting time, if one has been assigned.
+     */
+    public Optional<LocalTime> getMeetingTime() {
+        return Optional.ofNullable(meetingTime);
+    }
+
+    /**
+     * Returns true if both a meeting date and meeting time have been assigned.
+     */
+    public boolean hasMeeting() {
+        return meetingDate != null && meetingTime != null;
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -91,6 +132,10 @@ public class Person {
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
+    /**
+     * Returns true if both persons have the same identity and data fields, including
+     * favourite status and any scheduled meeting.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -108,15 +153,24 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && details.equals(otherPerson.details)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && isFavourite == otherPerson.isFavourite
+                && Objects.equals(meetingDate, otherPerson.meetingDate)
+                && Objects.equals(meetingTime, otherPerson.meetingTime);
     }
 
+    /**
+     * Returns a hash code that includes the person's identity, details, favourite status and meeting.
+     */
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, details, tags);
+        return Objects.hash(name, phone, email, address, details, tags, isFavourite, meetingDate, meetingTime);
     }
 
+    /**
+     * Returns a string representation of this person for debugging.
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -126,6 +180,9 @@ public class Person {
                 .add("address", address)
                 .add("details", details)
                 .add("tags", tags)
+                .add("isFavourite", isFavourite)
+                .add("meetingDate", meetingDate)
+                .add("meetingTime", meetingTime)
                 .toString();
     }
 

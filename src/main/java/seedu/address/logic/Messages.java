@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,6 +12,9 @@ import seedu.address.model.person.Person;
  * Container for user visible messages.
  */
 public class Messages {
+
+    private static final DateTimeFormatter MEETING_DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter MEETING_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
@@ -43,8 +47,16 @@ public class Messages {
                 .append(person.getEmail())
                 .append("; Address: ")
                 .append(person.getAddress())
+                .append("; Details: ")
+                .append(person.getDetails())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        if (person.hasMeeting()) {
+            builder.append("; Meeting: ")
+                    .append(person.getMeetingDate().orElseThrow().format(MEETING_DATE_FORMATTER))
+                    .append(" ")
+                    .append(person.getMeetingTime().orElseThrow().format(MEETING_TIME_FORMATTER));
+        }
         return builder.toString();
     }
 

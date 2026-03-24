@@ -84,7 +84,9 @@ public class UnmarkAsFavouriteCommand extends Command {
                 personToEdit.getAddress(),
                 personToEdit.getDetails(),
                 personToEdit.getTags(),
-                false);
+                false,
+                personToEdit.getMeetingDate().orElse(null),
+                personToEdit.getMeetingTime().orElse(null));
 
         model.setPerson(personToEdit, markedPerson);
 

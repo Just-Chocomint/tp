@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,6 +33,8 @@ public class PersonBuilder {
     private Details details;
     private Set<Tag> tags;
     private boolean isFavourite;
+    private LocalDate meetingDate;
+    private LocalTime meetingTime;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -43,7 +47,8 @@ public class PersonBuilder {
         details = new Details(DEFAULT_DETAILS);
         tags = new HashSet<>();
         isFavourite = DEFAULT_ISFAVOURITE;
-
+        meetingDate = null;
+        meetingTime = null;
     }
 
     /**
@@ -56,6 +61,9 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         details = personToCopy.getDetails();
         tags = new HashSet<>(personToCopy.getTags());
+        isFavourite = personToCopy.getIsFavourite();
+        meetingDate = personToCopy.getMeetingDate().orElse(null);
+        meetingTime = personToCopy.getMeetingTime().orElse(null);
     }
 
     /**
@@ -106,8 +114,25 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withIsFavourite(boolean isFavourite) {
+        this.isFavourite = isFavourite;
+        return this;
+    }
+
+    public PersonBuilder withMeeting(String date, String time) {
+        this.meetingDate = LocalDate.parse(date, java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.meetingTime = LocalTime.parse(time, java.time.format.DateTimeFormatter.ofPattern("HH:mm"));
+        return this;
+    }
+
+    public PersonBuilder withoutMeeting() {
+        this.meetingDate = null;
+        this.meetingTime = null;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, details, tags, isFavourite);
+        return new Person(name, phone, email, address, details, tags, isFavourite, meetingDate, meetingTime);
     }
 
 }

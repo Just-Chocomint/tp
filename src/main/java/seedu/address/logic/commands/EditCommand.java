@@ -107,9 +107,11 @@ public class EditCommand extends Command {
         Details updatedDetails = editPersonDescriptor.getDetails().orElse(personToEdit.getDetails());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         boolean updatedIsFavourite = personToEdit.getIsFavourite();
+        var updatedMeetingDate = personToEdit.getMeetingDate().orElse(null);
+        var updatedMeetingTime = personToEdit.getMeetingTime().orElse(null);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedDetails, updatedTags, updatedIsFavourite);
+                updatedDetails, updatedTags, updatedIsFavourite, updatedMeetingDate, updatedMeetingTime);
     }
 
     @Override

@@ -96,7 +96,9 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", details=" + ALICE.getDetails()
-                + ", tags=" + ALICE.getTags() + "}";
+                + ", tags=" + ALICE.getTags() + ", isFavourite=" + ALICE.getIsFavourite()
+                + ", meetingDate=" + ALICE.getMeetingDate().orElse(null)
+                + ", meetingTime=" + ALICE.getMeetingTime().orElse(null) + "}";
         assertEquals(expected, ALICE.toString());
     }
 
@@ -126,5 +128,12 @@ public class PersonTest {
         Person person1 = new PersonBuilder(ALICE).withDetails("Details 1").build();
         Person person2 = new PersonBuilder(ALICE).withDetails("Details 2").build();
         assertNotEquals(person1.hashCode(), person2.hashCode());
+    }
+
+    @Test
+    public void equals_differentMeeting_returnsFalse() {
+        Person person1 = new PersonBuilder(ALICE).withMeeting("23/03/2026", "14:30").build();
+        Person person2 = new PersonBuilder(ALICE).withoutMeeting().build();
+        assertFalse(person1.equals(person2));
     }
 }

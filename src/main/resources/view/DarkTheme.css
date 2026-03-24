@@ -132,6 +132,11 @@
     -fx-text-fill: #010504;
 }
 
+.meeting_label {
+    -fx-text-fill: #0b5d1e;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }

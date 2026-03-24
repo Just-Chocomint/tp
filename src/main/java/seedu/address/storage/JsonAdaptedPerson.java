@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,15 +35,29 @@ class JsonAdaptedPerson {
     private String details;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final boolean isFavourite;
+    private final String meetingDate;
+    private final String meetingTime;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     *
+     * @param name Serialized name.
+     * @param phone Serialized phone number.
+     * @param email Serialized email address.
+     * @param address Serialized address.
+     * @param details Serialized details field.
+     * @param tags Serialized tags.
+     * @param isFavourite Serialized favourite flag.
+     * @param meetingDate Serialized meeting date in ISO-8601 format, if present.
+     * @param meetingTime Serialized meeting time in ISO-8601 format, if present.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("details") String details, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("isFavourite") boolean isFavourite) {
+            @JsonProperty("isFavourite") boolean isFavourite,
+            @JsonProperty("meetingDate") String meetingDate,
+            @JsonProperty("meetingTime") String meetingTime) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,10 +67,14 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.isFavourite = isFavourite;
+        this.meetingDate = meetingDate;
+        this.meetingTime = meetingTime;
     }
 
     /**
      * Converts a given {@code Person} into this class for Jackson use.
+     *
+     * @param source Person to serialize.
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
@@ -65,11 +86,14 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         isFavourite = source.getIsFavourite();
+        meetingDate = source.getMeetingDate().map(LocalDate::toString).orElse(null);
+        meetingTime = source.getMeetingTime().map(LocalTime::toString).orElse(null);
     }
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *
+     * @return Deserialized {@code Person}.
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
@@ -121,7 +145,23 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final boolean modelIsFavourite = isFavourite;
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDetails, modelTags, modelIsFavourite);
+        if ((meetingDate == null) != (meetingTime == null)) {
+            throw new IllegalValueException("Meeting date and time must either both be present or both be absent.");
+        }
+
+        LocalDate modelMeetingDate = null;
+        LocalTime modelMeetingTime = null;
+        if (meetingDate != null) {
+            try {
+                modelMeetingDate = LocalDate.parse(meetingDate);
+                modelMeetingTime = LocalTime.parse(meetingTime);
+            } catch (DateTimeParseException exception) {
+                throw new IllegalValueException("Meeting date/time must be stored in ISO-8601 format.");
+            }
+        }
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelDetails,
+                modelTags, modelIsFavourite, modelMeetingDate, modelMeetingTime);
     }
 
 }
