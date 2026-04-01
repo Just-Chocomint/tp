@@ -30,7 +30,7 @@ in fast-paced environments.
 
 ## :rocket: Quick Start
 
-1. Ensure you have Java `17` or above installed on your Computer.<br>
+1. Ensure you h.ave Java `17` or above installed on your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
    1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
