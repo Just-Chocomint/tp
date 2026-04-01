@@ -85,7 +85,7 @@ in fast-paced environments.
 
 Action | Description                                                    | Format, Examples
 --------|----------------------------------------------------------------|------------------
-**Add** | [Adds a new person](#adding-a-person-add)                      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/DETAILS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/Looking to buy in north t/BUYER`
+**Add** | [Adds a new person](#adding-a-person-add)                      | `add n/NAME p/PHONE_NUMBER [e/EMAIL] a/ADDRESS [d/DETAILS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 d/Looking to buy in north t/BUYER`
 **Edit** | [Edits an existing person](#editing-a-person-edit)             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [d/DETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com d/Updated work details`
 **Find** | [Finds persons by name or phone](#locating-persons-find)       | `find KEYWORD [MORE_KEYWORDS]` for name search<br> `find p/PHONE_NUMBER` for phone search<br> e.g., `find James Jake` or `find p/98765432`
 **Delete** | [Deletes a person](#deleting-a-person--delete)                 | `delete PHONE`<br> e.g., `delete 91234567`
@@ -107,15 +107,15 @@ Action | Description                                                    | Format
 
 Adds a new contact
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/DETAILS] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] a/ADDRESS [d/DETAILS] [t/TAG]…​`
 
 Parameters:
 * `p/` : Phone number of the new contact (*Unique identifier*)
-  * `n/` : Name of the new contact
-  * `e/` : Email of the new contact
-  * `a/` : Address of the new contact
-  * `d/` : Details of the new contact [optional] (*Must be under 512 characters, cannot be empty*)
-  * `t/` : Tags of the new contact [optional] (*Valid tags: "Renter", "Landlord", "Buyer", "Seller"*)
+* `n/` : Name of the new contact
+* `e/` : Email of the new contact [optional] (*Must be 2-254 characters, or empty to represent no email*)
+* `a/` : Address of the new contact
+* `d/` : Details of the new contact [optional] (*Must be under 512 characters, cannot be empty*)
+* `t/` : Tags of the new contact [optional] (*Valid tags: "Renter", "Landlord", "Buyer", "Seller"*)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -125,11 +125,13 @@ Behavior:
 * If a contact with the same phone number already exists, the new contact will not be added.
   * Details will default to "No Details" if parameter not used.
   * Details must be under 512 characters and cannot be empty.
+  * Email will default to empty string if parameter not used.
+  * Email must be 2-254 characters if provided, or empty to represent no email.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-  * `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/BUYER`
-  * `add n/Alex Yeoh p/87438807 e/alexyeoh@example.com a/Blk 30 Geylang Street 29, #06-40 d/Looking for apartment near city`
+* `add n/Betsy Crowe a/Newgate Prison p/1234567 t/BUYER`
+* `add n/Alex Yeoh p/87438807 e/alexyeoh@example.com a/Blk 30 Geylang Street 29, #06-40 d/Looking for apartment near city`
 
 
 ### Editing a person: `edit`
@@ -142,7 +144,7 @@ Parameters:
 * `INDEX` : The index of the person to edit. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
   * `p/` : Phone number of the new contact (*Unique identifier*)
   * `n/` : Name of the new contact
-  * `e/` : Email of the new contact
+  * `e/` : Email of the new contact [optional] (*Must be 2-254 characters, or empty to clear email*)
   * `a/` : Address of the new contact
   * `d/` : Details of the new contact [optional] (*Must be under 512 characters, cannot be empty*)
   * `t/` : Tags of the new contact [optional] (*Valid tags: "Renter", "Landlord", "Buyer", "Seller"*)
@@ -156,12 +158,15 @@ Behavior:
       specifying any tags after it.
   * When editing details, the existing details of the person will be removed i.e adding of details is not cumulative.
   * Details field must be under 512 characters and cannot be empty, otherwise details will not be updated.
+  * When editing email, you can clear the email by typing `e/` without specifying any email after it.
+  * Email must be 2-254 characters if provided, or empty to clear email.
   * If a contact with the same phone number already exists, the contact will not be updated.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-  *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-    *  `edit 3 d/Updated details about this person` Edits the details of the 3rd person to be `Updated details about this person`.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 3 d/Updated details about this person` Edits the details of the 3rd person to be `Updated details about this person`.
+*  `edit 4 e/` Clears the email of the 4th person.
 
 ### Locating persons: `find`
 
@@ -384,7 +389,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## :warning: Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-   2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
