@@ -21,10 +21,10 @@ in fast-paced environments.
 
 ## :page_facing_up: Contents
 - [:rocket: Quick Start](#quick-start)
-  - [:clipboard: Command Summary](#command-summary)
-  - [:gear: Features](#features)
-  - [:question: FAQ](#faq)
-  - [:warning: Known Issues](#known-issues)
+- [:clipboard: Command Summary](#command-summary)
+- [:gear: Features](#features)
+- [:question: FAQ](#faq)
+- [:warning: Known Issues](#known-issues)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -33,31 +33,31 @@ in fast-paced environments.
 1. Ensure you h.ave Java `17` or above installed on your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-   1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-   1. Copy the file to the folder you want to use as the _home folder_ for your CLIentTrcaker.
+1. Copy the file to the folder you want to use as the _home folder_ for your CLIentTrcaker.
 
-   1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clienttracker.jar` command to run the application.<br>
-      A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-      ![Ui](images/Ui.png)
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clienttracker.jar` command to run the application.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
 
-   1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-      Some example commands you can try:
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   Some example commands you can try:
 
-      * `list` : Lists all contacts.
+   * `list` : Lists all contacts.
 
-      * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to CLIentTracker.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to CLIentTracker.
 
-      * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-      * `clear` : Deletes all contacts.
+   * `clear` : Deletes all contacts.
 
-        * `find n/John` : Finds contacts whose names contain ‘John’.
+   * `find n/John` : Finds contacts whose names contain ‘John’.
 
-      * `exit` : Exits the app.
+   * `exit` : Exits the app.
 
-   1. Refer to the [Command summary](#command-summary) below for a quick list of all commands or [Features](#features) for detailed descriptions.
-   .
+1. Refer to the [Command summary](#command-summary) below for a quick list of all commands or [Features](#features) for detailed descriptions.
+.
 --------------------------------------------------------------------------------------------------------------------
 ## :clipboard: Command Summary
 
@@ -142,25 +142,24 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DETAILS] [t/TAG]
 
 Parameters:
 * `INDEX` : The index of the person to edit. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-  * `p/` : Phone number of the new contact (*Unique identifier*)
-  * `n/` : Name of the new contact
-  * `e/` : Email of the new contact [optional] (*Must be 2-254 characters, or empty to clear email*)
-  * `a/` : Address of the new contact
-  * `d/` : Details of the new contact [optional] (*Must be under 512 characters, cannot be empty*)
-  * `t/` : Tags of the new contact [optional] (*Valid tags: "Renter", "Landlord", "Buyer", "Seller"*)
+* `p/` : Phone number of the new contact (*Unique identifier*)
+* `n/` : Name of the new contact
+* `e/` : Email of the new contact
+* `a/` : Address of the new contact
+* `d/` : Details of the new contact [optional] (*Must be under 512 characters, cannot be empty*)
+* `t/` : Tags of the new contact [optional] (*Valid tags: "Renter", "Landlord", "Buyer", "Seller"*)
 
 Behavior:
 * The index field is mandatory and **must be a positive integer smaller than the number of contacts**
-  * At least one of the optional fields must be provided.
-  * Existing values will be updated to the input values.
-  * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-  * You can remove all the person’s tags by typing `t/` without
-      specifying any tags after it.
-  * When editing details, the existing details of the person will be removed i.e adding of details is not cumulative.
-  * Details field must be under 512 characters and cannot be empty, otherwise details will not be updated.
-  * When editing email, you can clear the email by typing `e/` without specifying any email after it.
-  * Email must be 2-254 characters if provided, or empty to clear email.
-  * If a contact with the same phone number already exists, the contact will not be updated.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
+    specifying any tags after it.
+* When editing details, the existing details of the person will be removed i.e adding of details is not cumulative.
+* Details field must be under 512 characters and cannot be empty, otherwise details will not be updated.
+* If a contact with the same phone number already exists, the contact will not be updated.
+
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -197,6 +196,7 @@ Search for persons using keywords across all fields or within specific fields.
   - `find alex`
   - `find alex, bob`
   - `find 9876`
+
 #### **Field-Specific Search:**
 - Searches only within specified field(s)
 - Case-insensitive and supports partial matches
@@ -308,7 +308,7 @@ Format: `clear`
 Add or remove contacts from favourites
 
 Format: `mark INDEX` or `unmark INDEX`
-* Mark `INDEX` adds the contact at the specified index to favourites.  
+* Mark `INDEX` adds the contact at the specified index to favourites.
 * Unmark `INDEX` removes the contact at INDEX from favourites
 * `INDEX` refers to the index number shown on the displayed person list
 * `INDEX` must be a valid number in the list
