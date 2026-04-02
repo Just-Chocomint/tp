@@ -304,7 +304,7 @@ Format: `clear`
 Add or remove contacts from favourites
 
 Format: `mark INDEX` or `unmark INDEX`
-* Mark `INDEX` adds the contact at the specified index to favourites.  
+* Mark `INDEX` adds the contact at the specified index to favourites.
 * Unmark `INDEX` removes the contact at INDEX from favourites
 * `INDEX` refers to the index number shown on the displayed person list
 * `INDEX` must be a valid number in the list
