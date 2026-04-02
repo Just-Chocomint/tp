@@ -17,20 +17,20 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2526s2-cs2103t-t14-2.github.io/tp/UserGuide.html#quick-start";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-    public static final String COMMAND_SUMMARY = 
-        "Quick Command Summary:\n\n" +
-        "• add n/NAME p/PHONE [e/EMAIL] [a/ADDRESS] [d/DETAILS] [t/TAGS] [m/MEETING]\n" +
-        "• edit INDEX [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DETAILS] [t/TAGS] [m/MEETING]\n" +
-        "• delete INDEX\n" +
-        "• clear\n" +
-        "• list\n" +
-        "• find KEYWORD\n" +
-        "• find n/NAME p/PHONE e/EMAIL a/ADDRESS\n" +
-        "• meeting INDEX DATETIME\n" +
-        "• favourite INDEX\n" +
-        "• unfavourite INDEX\n" +
-        "• help\n\n" +
-        "For detailed usage, refer to the user guide.\n";
+    public static final String COMMAND_SUMMARY =
+        "Quick Command Summary:\n\n"
+        + "• add n/NAME p/PHONE [e/EMAIL] [a/ADDRESS] [d/DETAILS] [t/TAGS] [m/MEETING]\n"
+        + "• edit INDEX [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DETAILS] [t/TAGS] [m/MEETING]\n"
+        + "• delete INDEX\n"
+        + "• clear\n"
+        + "• list\n"
+        + "• find KEYWORD\n"
+        + "• find n/NAME p/PHONE e/EMAIL a/ADDRESS\n"
+        + "• meeting INDEX DATETIME\n"
+        + "• favourite INDEX\n"
+        + "• unfavourite INDEX\n"
+        + "• help\n\n"
+        + "For detailed usage, refer to the user guide.\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
