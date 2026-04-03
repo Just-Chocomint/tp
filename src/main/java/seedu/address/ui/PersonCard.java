@@ -64,7 +64,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value.isEmpty() ? "No address" : person.getAddress().value);
         email.setText(person.getEmail().value.isEmpty() ? "No email" : person.getEmail().value);
-        details.setText(person.getDetails().value);
+        details.setText(person.getDetails().value.isEmpty() ? "No details" : person.getDetails().value);
         if (person.hasMeeting()) {
             String meetingText = "Meeting: " + person.getMeeting().orElseThrow().getFormattedDateTime();
             meeting.setText(meetingText);

@@ -18,7 +18,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Details;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -76,7 +75,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (!detailsValue.trim().isEmpty()) {
                 editPersonDescriptor.setDetails(ParserUtil.parseDetails(detailsValue));
             } else {
-                throw new ParseException(Details.MESSAGE_CONSTRAINTS);
+                editPersonDescriptor.setDetails(ParserUtil.parseDetails(""));
             }
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);

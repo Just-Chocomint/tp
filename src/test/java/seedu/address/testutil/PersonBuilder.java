@@ -24,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "";
     public static final String DEFAULT_ADDRESS = "";
-    public static final String DEFAULT_DETAILS = "No details";
+    public static final String DEFAULT_DETAILS = "";
     public static final boolean DEFAULT_ISFAVOURITE = false;
 
 

@@ -196,20 +196,15 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDetails_noDetails_returnsDetails() throws Exception {
-        Details actualDetails = ParserUtil.parseDetails("No details");
-        assertEquals("No details", actualDetails.value);
-    }
-
-    @Test
     public void parseDetails_validDetails_returnsDetails() throws Exception {
         Details actualDetails = ParserUtil.parseDetails("Valid details");
         assertEquals("Valid details", actualDetails.value);
     }
 
     @Test
-    public void parseDetails_invalidDetails_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDetails(""));
+    public void parseDetails_whitespaceDetails_returnsDetails() throws Exception {
+        Details actualDetails = ParserUtil.parseDetails("   ");
+        assertEquals("", actualDetails.value);
     }
 
 }

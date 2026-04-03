@@ -62,7 +62,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .orElse(""));
         Details details = ParserUtil.parseDetails(argMultimap.getValue(PREFIX_DETAILS)
                 .filter(detail -> !detail.trim().isEmpty())
-                .orElse("No details"));
+                .orElse(""));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, details, tagList, false, null);
