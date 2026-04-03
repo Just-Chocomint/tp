@@ -111,7 +111,7 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [d/DETAILS] [t/TAG]…�
 
 Parameters:
 * `p/` : Phone number of the new contact (*Unique identifier*)
-* `n/` : Name of the new contact
+* `n/` : Name of the new contact (*Must be 1-50 characters*)
 * `e/` : Email of the new contact [optional] (*Must be 2-254 characters, or empty to represent no email*)
 * `a/` : Address of the new contact [optional] (*Must be 1-255 characters, or empty to represent no address*)
 * `d/` : Details of the new contact [optional] (*Must be under 512 characters, cannot be empty*)
@@ -123,12 +123,13 @@ A person can have any number of tags (including 0)
 
 Behavior:
 * If a contact with the same phone number already exists, the new contact will not be added.
-  * Details will default to "No Details" if parameter not used.
-  * Details must be under 512 characters and cannot be empty.
-  * Email will default to empty string if parameter not used.
-  * Email must be 2-254 characters if provided, or empty to represent no email.
-  * Address will default to empty string if parameter not used.
-  * Address must be 1-255 characters if provided, or empty to represent no address.
+* Name must be 1-50 characters and contain only alphanumeric characters and spaces.
+* Details will default to "No Details" if parameter not used.
+* Details must be under 512 characters and cannot be empty.
+* Email will default to empty string if parameter not used.
+* Email must be 2-254 characters if provided, or empty to represent no email.
+* Address will default to empty string if parameter not used.
+* Address must be 1-255 characters if provided, or empty to represent no address.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -145,7 +146,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/DETAILS] [t/TAG]
 Parameters:
 * `INDEX` : The index of the person to edit. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * `p/` : Phone number of the new contact (*Unique identifier*)
-* `n/` : Name of the new contact
+* `n/` : Name of the new contact (*Must be 1-50 characters*)
 * `e/` : Email of the new contact [optional] (*Must be 2-254 characters, or empty to represent no email*)
 * `a/` : Address of the new contact [optional] (*Must be 1-255 characters, or empty to represent no address*)
 * `d/` : Details of the new contact [optional] (*Must be under 512 characters, cannot be empty*)
