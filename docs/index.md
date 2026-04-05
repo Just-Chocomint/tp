@@ -1,18 +1,19 @@
 ---
-layout: page
-title: AddressBook Level-3
+layout: docs-page
+title: ClientTracker
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![CI Status](https://github.com/AY2526S2-CS2103T-T14-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2526S2-CS2103T-T14-2/tp/actions/workflows/gradle.yml)
 
 ![Ui](images/Ui.png)
 
-**AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**ClientTracker is a desktop CRM for property agents.** It helps agents manage clients, meetings, notes, and listings quickly through a Command Line Interface (CLI), while still keeping a clean visual desktop interface.
 
-* If you are interested in using AddressBook, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing AddressBook, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+ClientTracker is designed for fast day-to-day workflows such as adding clients, finding contact details, scheduling meetings, and updating records without depending on an internet connection.
 
+* If you want to start using ClientTracker, head over to the dedicated [**User Guide**](UserGuide.html).
+* If you want the setup steps first, visit the [**Quick Start**](QuickStart.html).
+* If you are working on the product itself, the [**Developer Guide**](DeveloperGuide.html) is the best place to begin.
 
 **Acknowledgements**
 

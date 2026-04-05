@@ -1,0 +1,33 @@
+- title: Home
+  url: /index.html
+
+- title: User Guide
+  url: /UserGuide.html
+  children:
+    - title: Quick Start
+      url: /QuickStart.html
+    - title: Command Summary
+      url: /UserGuide.html#command-summary
+    - title: Features
+      url: /UserGuide.html#features
+    - title: FAQ
+      url: /UserGuide.html#faq
+    - title: Known Issues
+      url: /UserGuide.html#known-issues
+
+- title: Developer Guide
+  url: /DeveloperGuide.html
+  children:
+    - title: Acknowledgements
+      url: /DeveloperGuide.html#acknowledgements
+    - title: Setting Up
+      url: /DeveloperGuide.html#setting-up-getting-started
+    - title: Design
+      url: /DeveloperGuide.html#design
+    - title: Implementation
+      url: /DeveloperGuide.html#implementation
+    - title: Appendix
+      url: /DeveloperGuide.html#appendix-requirements
+
+- title: About Us
+  url: /AboutUs.html

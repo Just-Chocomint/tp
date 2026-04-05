@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<div class="docs-shell">
+  {%- include docs_sidebar.html -%}
+
+  <article class="post docs-content">
+    <header class="post-header">
+      <h1 class="post-title">{{ page.title | escape }}</h1>
+    </header>
+
+    <div class="post-content">
+      {{ content }}
+    </div>
+  </article>
+
+  {%- if page.toc -%}
+  <aside class="docs-page-nav" aria-label="On this page">
+    <div class="docs-page-nav__title">{{ page.toc_label | default: "On this page" }}</div>
+    <nav>
+      <ul id="docs-page-nav-list" class="docs-page-nav__list"></ul>
+    </nav>
+  </aside>
+  {%- endif -%}
+</div>
+<script src="{{ "/assets/js/docs-search.js" | relative_url }}"></script>
+{%- if page.toc -%}
+<script src="{{ "/assets/js/docs-page-nav.js" | relative_url }}"></script>
+{%- endif -%}
