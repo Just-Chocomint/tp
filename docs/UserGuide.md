@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: docs-page
 title: User Guide
 toc: true
 toc_label: "On this page"
@@ -20,46 +20,18 @@ Built for agents who value speed, reliability, and control, CLIentTracker helps 
 in fast-paced environments.
 
 ## :page_facing_up: Contents
-- [:rocket: Quick Start](#quick-start)
+- [:rocket: Quick Start](QuickStart.html)
 - [:clipboard: Command Summary](#command-summary)
 - [:gear: Features](#features)
 - [:question: FAQ](#faq)
 - [:warning: Known Issues](#known-issues)
 
---------------------------------------------------------------------------------------------------------------------
+---
+Need help getting started fast? Head to the dedicated [Quick Start guide](QuickStart.html) for installation and your first commands.
 
-## :rocket: Quick Start
-
-1. Ensure you h.ave Java `17` or above installed on your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
-
-1. Copy the file to the folder you want to use as the _home folder_ for your CLIentTrcaker.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clienttracker.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to CLIentTracker.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `find n/John` : Finds contacts whose names contain ‘John’.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Command summary](#command-summary) below for a quick list of all commands or [Features](#features) for detailed descriptions.
-.
---------------------------------------------------------------------------------------------------------------------
+---
 ## :clipboard: Command Summary
+{: #command-summary }
 
 <div markdown="block" class="alert alert-info">
 
@@ -93,15 +65,16 @@ Action | Description                                                    | Format
 **Mark** | [Adds contact into favourites](#favourites-mark-and-unmark)    | `mark INDEX` <br> Example: `mark 1`
 **Unmark** | [Removes contact from favourites](#favourites-mark-and-unmark) | `unmark INDEX` <br> Example: `mark 1`
 **Meeting** | [Adds meeting datetime to contact](#adding-a-meeting-meeting)  | `meeting INDEX DATE_TIME` <br> Example: `meeting 1 mon 2pm`
-**Undo** | [Undo previous changes](#Undo-previous-changes-undo)           | `undo`
+**Undo** | [Undo previous changes](#undo)                                 | `undo`
 **List** | [Lists all persons](#listing-all-persons-list)                 | `list`
 **Favourites** | [View favourites](#Viewing-favourites)                         | `favourite`
 **Help** | [Shows help message](#viewing-help-help)                       | `help`
 **Exit** | [Exits the app](#exiting-the-program-exit)                     | `exit`
 
 
---------------------------------------------------------------------------------------------------------------------
+---
 ## :gear: Features
+{: #features }
 
 ### Adding a person: `add`
 
@@ -136,6 +109,7 @@ Examples:
 * `add n/Betsy Crowe a/Newgate Prison p/1234567 t/BUYER`
 * `add n/Alex Yeoh p/87438807 e/alexyeoh@example.com a/Blk 30 Geylang Street 29, #06-40 d/Looking for apartment near city`
 
+---
 
 ### Editing a person: `edit`
 
@@ -172,6 +146,8 @@ Examples:
 *  `edit 3 d/` Clears the details of the 3rd person.
 *  `edit 4 e/` Clears the email of the 4th person.
 *  `edit 5 a/` Clears the address of the 5th person.
+
+---
 
 ### Locating persons: `find`
 
@@ -274,8 +250,6 @@ Format: `meeting INDEX DATE_TIME`
 - `meeting 8 monday 2pm` (next Monday at 2 PM)
 - `meeting 9 fri 1600` (next Friday at 4 PM)
 
----
-
 ### ⚠️ Important Notes
 - Meeting dates and times must be in the future
 - If no time is specified, defaults to 12:00 AM (midnight)
@@ -289,9 +263,11 @@ Examples:
 * `meeting 3 Today 2359` Adds meeting for today at 11:59 PM
 * `meeting 4 Monday 9am` Adds meeting for next Monday at 9:00 AM
 
+---
+
 ### Deleting a person : `delete`
 
-Deletes the specified person from CLIent Tracker.
+Deletes the specified person from Client Tracker.
 
 Format: `delete PHONE`
 
@@ -301,13 +277,17 @@ Format: `delete PHONE`
   * Confirm with y/n after delete command was entered
 
 Examples:
-* `delete 91234567` deletes the person with said phone number in CLIentTracker.
+* `delete 91234567` deletes the person with said phone number in Client Tracker.
+
+---
 
 ### Clearing all entries : `clear`
 
-Clears all entries from CLIentTracker.
+Clears all entries from Client Tracker.
 
 Format: `clear`
+
+---
 
 ### Favourites: `mark` and `unmark`
 
@@ -322,8 +302,10 @@ Format: `mark INDEX` or `unmark INDEX`
 Examples:
 * `mark 1` <br> ![mark 1 image](./images/mark_1_image.png)
 
+---
 
 ### Undo previous changes: `undo`
+{: #undo }
 
 Reverts the most recent change made to Client Tracker contacts.
 
@@ -332,18 +314,23 @@ Format: `undo`
 * Restores the contact list to its previous state before the last modifying command
 * If there are no previous changes to undo in the current session, an error message is shown
 
+---
 
 ### Listing all persons: `list`
 
-Shows a list of all persons in the CLIentTracker.
+Shows a list of all persons in Client Tracker.
 
 Format: `list`
+
+---
 
 ### Viewing favourites: `favourites`
 
 Shows a list with only contacts in favourites.
 
 Format: `favourites`
+
+---
 
 ### Viewing help: `help`
 
@@ -353,16 +340,19 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+---
+
 ### Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
 
+---
 
 ### :floppy_disk: Data Storage & Saving
 
-CLIentTracker is designed to be **fast and worry-free** — your data is automatically saved after every command.
+Client Tracker is designed to be **fast and worry-free** — your data is automatically saved after every command.
 
 There is **no need to press a save button**. Everything is stored locally on your device, allowing you to:
 - Work completely offline
@@ -373,29 +363,32 @@ All data is stored in:
 
 `[JAR file location]/data/addressbook.json`
 
+---
+
 ### :pencil2: Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Client Tracker data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" cl ass="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, Client Tracker will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause Client Tracker to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## :question: FAQ
+{: #faq }
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data from your previous Client Tracker home folder.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## :warning: Known Issues
+{: #known-issues }
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
---------------------------------------------------------------------------------------------------------------------
-
+---

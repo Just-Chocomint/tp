@@ -1,0 +1,38 @@
+<aside class="docs-sidebar" aria-label="Documentation navigation">
+  <div class="docs-sidebar__title">Site Map</div>
+  <div class="docs-search">
+    <label class="docs-search__label" for="docs-search-input">Search docs</label>
+    <input
+      id="docs-search-input"
+      class="docs-search__input"
+      type="search"
+      placeholder="Search pages and sections"
+      autocomplete="off"
+    >
+    <ul id="docs-search-results" class="docs-search__results" hidden></ul>
+  </div>
+  <nav class="docs-sidebar__nav">
+    <ul class="docs-sidebar__list">
+      {%- for item in site.data.docs_nav -%}
+      {%- assign is_current = page.url == item.url -%}
+      <li class="docs-sidebar__item">
+        <a
+          class="docs-sidebar__link{% if is_current %} is-current{% endif %}"
+          href="{{ item.url | relative_url }}"
+        >
+          {{ item.title }}
+        </a>
+        {%- if item.children -%}
+        <ul class="docs-sidebar__children">
+          {%- for child in item.children -%}
+          <li>
+            <a class="docs-sidebar__child-link" href="{{ child.url | relative_url }}">{{ child.title }}</a>
+          </li>
+          {%- endfor -%}
+        </ul>
+        {%- endif -%}
+      </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+</aside>
