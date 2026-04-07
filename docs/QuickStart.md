@@ -14,8 +14,8 @@ still having a clean desktop interface.
 
 1. Copy the file to the folder you want to use as the _home folder_ for your CLIentTracker.
 
-1. Open a terminal, `cd` into that folder, and run `java -jar clienttracker.jar`.<br>
-   A GUI similar to the below should appear in a few seconds with some sample data loaded.<br>
+1. Open the folder where your CLIentTracker is currently located, double click to run CLIentTracker and a User Interface
+   similar to the one below should appear in a few seconds with some sample data loaded.<br>
    ![Ui](images/Ui.png)
 
 ## Try It Out

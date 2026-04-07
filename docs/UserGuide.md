@@ -64,7 +64,7 @@ Action | Description                                                    | Format
 **Clear** | [Clears all entries](#clearing-all-entries--clear)             | `clear`
 **Mark** | [Adds contact into favourites](#favourites-mark-and-unmark)    | `mark INDEX` <br> Example: `mark 1`
 **Unmark** | [Removes contact from favourites](#favourites-mark-and-unmark) | `unmark INDEX` <br> Example: `mark 1`
-**Meeting** | [Adds meeting datetime to contact](#adding-a-meeting-meeting)  | `meeting INDEX DATE_TIME` <br> Example: `meeting 1 mon 2pm`
+**Meeting** | [Adds or clears a meeting for a contact](#adding-a-meeting-meeting)  | `meeting INDEX DATE_TIME` or `meeting INDEX clear` <br> Example: `meeting 1 mon 2pm`
 **Undo** | [Undo previous changes](#undo)                                 | `undo`
 **List** | [Lists all persons](#listing-all-persons-list)                 | `list`
 **Favourites** | [View favourites](#Viewing-favourites)                         | `favourite`
@@ -219,11 +219,12 @@ Search for persons using keywords across all fields or within specific fields.
 ---
 
 ### Adding a meeting: `meeting`
-Adds a meeting date and time for a client identified by the displayed index number.
+Adds or clears a meeting for a client identified by the displayed index number.
 
-Format: `meeting INDEX DATE_TIME`
+Format: `meeting INDEX DATE_TIME` or `meeting INDEX clear`
 
 * The **INDEX** refers to the index number shown in the displayed person list.
+* Use `clear` to remove an existing meeting from the selected client.
 * The **DATE_TIME** can be entered in various flexible formats:
 
 **Relative Date formats:**
@@ -263,6 +264,7 @@ Format: `meeting INDEX DATE_TIME`
 - `meeting 7 tomorrow 9am` (tomorrow at 9 AM)
 - `meeting 8 monday 2pm` (next Monday at 2 PM)
 - `meeting 9 fri 1600` (next Friday at 4 PM)
+- `meeting 1 clear` (clears the meeting for the 1st person)
 
 ### ⚠️ Important Notes
 - Meeting dates and times must be in the future
@@ -276,6 +278,7 @@ Examples:
 * `meeting 2 15 Mar 2030 4pm` Adds meeting for 2nd person
 * `meeting 3 Today 2359` Adds meeting for today at 11:59 PM
 * `meeting 4 Monday 9am` Adds meeting for next Monday at 9:00 AM
+* `meeting 1 clear` Clears meeting for 1st person
 
 ---
 
@@ -375,13 +378,13 @@ There is **no need to press a save button**. Everything is stored locally on you
 
 All data is stored in:
 
-`[JAR file location]/data/addressbook.json`
+`[CLIentTracker file location]/data/addressbook.json`
 
 ---
 
 ### :pencil2: Editing the data file
 
-Client Tracker data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Client Tracker data are saved automatically as a JSON file `[CLIentTracker file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" cl ass="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Client Tracker will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
