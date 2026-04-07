@@ -125,19 +125,16 @@ Parameters:
 * `a/` : Address of the new contact [optional] (*Must be 1-255 characters, or empty to represent no address*)
 * `d/` : Details of the new contact [optional] (*Must be under 512 characters, or empty to represent no details*)
 * `t/` : Tags of the new contact [optional] (*Valid tags: "Renter", "Landlord", "Buyer", "Seller"*)
-
+S
 Behavior:
-* The index field is mandatory and **must be a positive integer smaller than the number of contacts**
-* At least one of the optional fields must be provided.
+* The index field is mandatory and **must be a positive integer smaller than the number of contacts**.
+* At least one of the fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-* When editing details, the existing details of the person will be removed i.e adding of details is not cumulative.
-* When editing details, you can clear the details by using `d/` without specifying any value after it.
-* When editing email, you can clear the email by using `e/` without specifying any value after it.
-* When editing address, you can clear the address by using `a/` without specifying any value after it.
-* If a contact with the same phone number already exists, the contact will not be updated.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* Editing details replaces existing ones (not cumulative).
+* Use `d/`, `e/`, or `a/` with no value to clear details, email, or address respectively.
+* Contacts with duplicate phone numbers will not be updated.
 
 
 Examples:
@@ -290,17 +287,19 @@ Format: `delete PHONE`
 
 * Deletes the person with `PHONE`.
   * The PHONE refers to the index number shown in the displayed person list.
-  * The PHONE **must match fully  **​
+  * The PHONE **must match fully** ​
   * Confirm with y/n after delete command was entered
 
 Examples:
 * `delete 91234567` deletes the person with said phone number in Client Tracker.
+* `delete 912` is invalid and will throw a error message
 
 ---
 
 ### Clearing all entries : `clear`
 
-Clears all entries from Client Tracker.
+Deletes all entries from Client Tracker, including favourites. 
+* Confirm with y/n after clear command was entered
 
 Format: `clear`
 
@@ -343,7 +342,9 @@ Format: `list`
 
 ### Viewing favourites: `favourites`
 
-Shows a list with only contacts in favourites.
+Displays a list containing only contacts marked as favourites. Favourite contacts are those previously flagged by the user using the `mark` command
+
+![favourites message](images/favourites.png)
 
 Format: `favourites`
 
@@ -351,7 +352,8 @@ Format: `favourites`
 
 ### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+Shows a message explaining how to access the help page
+The user can open their preferred browser and paste the provided URL to access it
 
 ![help message](images/helpMessage.png)
 
