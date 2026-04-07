@@ -10,12 +10,14 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.SearchPersonForKeyword;
 import seedu.address.testutil.AddressBookBuilder;
@@ -98,15 +100,25 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_favouritesShownFirst() {
-        Person favouritePerson = new PersonBuilder(ALICE).withIsFavourite(true).build();
+    public void getFilteredPersonList_meetingsShownFirstAndSortedByDateTime() {
+        Person laterMeetingPerson = new PersonBuilder(ALICE)
+                .withMeeting(new Meeting(LocalDateTime.of(2030, 3, 26, 14, 30)))
+                .build();
+        Person earlierMeetingPerson = new PersonBuilder(BENSON)
+                .withMeeting(new Meeting(LocalDateTime.of(2030, 3, 25, 14, 30)))
+                .build();
+        Person noMeetingPerson = new PersonBuilder().withName("Charlie Puth").withPhone("91234567").build();
+
+        modelManager.addPerson(noMeetingPerson);
         modelManager.addPerson(BENSON);
         modelManager.addPerson(ALICE);
 
-        modelManager.setPerson(ALICE, favouritePerson);
+        modelManager.setPerson(ALICE, laterMeetingPerson);
+        modelManager.setPerson(BENSON, earlierMeetingPerson);
 
-        assertEquals(favouritePerson, modelManager.getFilteredPersonList().get(0));
-        assertEquals(BENSON, modelManager.getFilteredPersonList().get(1));
+        assertEquals(earlierMeetingPerson, modelManager.getFilteredPersonList().get(0));
+        assertEquals(laterMeetingPerson, modelManager.getFilteredPersonList().get(1));
+        assertEquals(noMeetingPerson, modelManager.getFilteredPersonList().get(2));
     }
 
     @Test
@@ -127,7 +139,7 @@ public class ModelManagerTest {
 
         assertEquals("delete 11111111", undoneCommand);
         assertEquals(Arrays.asList(ALICE, BENSON), modelManager.getAddressBook().getPersonList());
-        assertEquals(Arrays.asList(ALICE, BENSON), modelManager.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, ALICE), modelManager.getFilteredPersonList());
     }
 
     @Test

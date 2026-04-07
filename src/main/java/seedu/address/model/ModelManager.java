@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Stack;
 import java.util.function.Predicate;
@@ -21,9 +22,12 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static final Comparator<Person> FAVOURITES_FIRST_COMPARATOR =
-            Comparator.comparing(Person::getIsFavourite)
+    private static final Comparator<Person> MEETINGS_FIRST_COMPARATOR =
+            Comparator.comparing(Person::hasMeeting)
                     .reversed()
+                    .thenComparing(person -> person.getMeeting()
+                            .map(meeting -> meeting.getDateTime())
+                            .orElse(LocalDateTime.MAX))
                     .thenComparing(person -> person.getName().fullName, String.CASE_INSENSITIVE_ORDER);
 
     private final AddressBook addressBook;
@@ -47,7 +51,7 @@ public class ModelManager implements Model {
         commandHistory = new Stack<>();
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedFilteredPersons = new SortedList<>(filteredPersons);
-        sortedFilteredPersons.setComparator(FAVOURITES_FIRST_COMPARATOR);
+        sortedFilteredPersons.setComparator(MEETINGS_FIRST_COMPARATOR);
     }
 
     public ModelManager() {
