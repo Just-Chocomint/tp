@@ -273,7 +273,7 @@ Format: `delete PHONE`
 
 * Deletes the person with `PHONE`.
   * The PHONE refers to the index number shown in the displayed person list.
-  * The PHONE **must consist of 8 positive integer** 91234567, 01010101…​
+  * The PHONE **must match fully  **​
   * Confirm with y/n after delete command was entered
 
 Examples:
