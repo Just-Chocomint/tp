@@ -19,6 +19,8 @@ closes, ensuring records remain secure without manual intervention.
 Built for agents who value speed, reliability, and control, CLIentTracker helps users focus on clients rather than tools
 in fast-paced environments.
 
+<img src="images/GUI.png" width="700" />
+
 ## :page_facing_up: Contents
 - [:rocket: Quick Start](#quick-start)
 - [:clipboard: Command Summary](#command-summary)
@@ -142,6 +144,8 @@ Examples:
 * `add n/Betsy Crowe a/Newgate Prison p/12345678 t/BUYER`
 * `add n/Alex Yeoh p/87438807 e/alexyeoh@example.com a/Blk 30 Geylang Street 29, #06-40 d/Looking for apartment near city`
 
+<img src="images/addExample.png" width="700" />
+
 ---
 
 ### Editing a person: `edit`
@@ -176,6 +180,8 @@ Examples:
 *  `edit 3 d/` Clears the details of the 3rd person.
 *  `edit 4 e/` Clears the email of the 4th person.
 *  `edit 5 a/` Clears the address of the 5th person.
+
+<img src="images/editExample.png" width="700" />
 
 #### **Important Notes:**
 - If you want to change a specific field, **remember to have a white space before the prefix**
