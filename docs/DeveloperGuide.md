@@ -9,8 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* Used Windsurf to generate some of the JavaDocs
-* Used Windsurf to help with most tests
+* Used AI to generate some of the JavaDocs
+* Used AI to help with most tests
 * Used AI to generate sample data
 * Used AI to identify bugs
 * Used AI to help improve the Developer Guide, User Guide, and documentation formatting
@@ -262,7 +262,7 @@ Its implementation is split into two main parts:
 1. parsing the user-provided date/time string into a valid `Meeting`
 2. executing the command to replace the target `Person` with an updated copy containing the new meeting, or no meeting when `clear` is used
 
-#### How the command works
+#### Implementation
 
 When the user enters a command such as `meeting 1 15 Mar 2026 4pm` or `meeting 1 clear`, `LogicManager` passes the full input to
 `AddressBookParser`, which creates a `MeetingCommandParser` for the `meeting` command word.
