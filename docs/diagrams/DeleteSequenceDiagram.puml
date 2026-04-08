@@ -46,7 +46,7 @@ destroy DeleteCommandParser
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
-LogicManager -> DeleteCommand : requestConfirmation(m)
+LogicManager -> DeleteCommand : requestConfirmation(m, "delete 91234567")
 activate DeleteCommand
 
 create CommandResult
@@ -68,7 +68,7 @@ activate LogicManager
 LogicManager -> DeleteCommand : confirmationCommand(m, "y")
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : deletePerson(person)
 activate Model
 
 Model --> DeleteCommand
