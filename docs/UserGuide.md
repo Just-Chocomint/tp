@@ -19,6 +19,8 @@ closes, ensuring records remain secure without manual intervention.
 Built for agents who value speed, reliability, and control, CLIentTracker helps users focus on clients rather than tools
 in fast-paced environments.
 
+<img src="images/GUI.png" width="700" />
+
 ## :page_facing_up: Contents
 - [:rocket: Quick Start](#quick-start)
 - [:clipboard: Command Summary](#command-summary)
@@ -95,9 +97,9 @@ Action | Description                                                    | Format
 **Find** | [Finds persons by name or phone](#locating-persons-find)       | `find KEYWORD [MORE_KEYWORDS]` for name search<br> `find p/PHONE_NUMBER` for phone search<br> e.g., `find James Jake` or `find p/98765432`
 **Delete** | [Deletes a person](#deleting-a-person--delete)                 | `delete PHONE`<br> e.g., `delete 91234567`
 **Clear** | [Clears all entries](#clearing-all-entries--clear)             | `clear`
-**Mark** | [Adds contact into favourites](#favourites-mark-and-unmark)    | `mark INDEX` <br> Example: `mark 1`
-**Unmark** | [Removes contact from favourites](#favourites-mark-and-unmark) | `unmark INDEX` <br> Example: `unmark 1`
-**Meeting** | [Adds or clears a meeting for a contact](#adding-a-meeting-meeting)  | `meeting INDEX DATE_TIME` or `meeting INDEX clear` <br> Example: `meeting 1 mon 2pm`
+**Mark** | [Adds contact into favourites](#favourites-mark-and-unmark)    | `mark INDEX` <br> e.g., `mark 1`
+**Unmark** | [Removes contact from favourites](#favourites-mark-and-unmark) | `unmark INDEX` <br> e.g., `unmark 1`
+**Meeting** | [Adds or clears a meeting for a contact](#adding-a-meeting-meeting)  | `meeting INDEX DATE_TIME` or `meeting INDEX clear` <br> e.g., `meeting 1 mon 2pm`
 **Undo** | [Undo previous changes](#undo)                                 | `undo`
 **List** | [Lists all persons](#listing-all-persons-list)                 | `list`
 **Favourites** | [View favourites](#Viewing-favourites)                         | `favourites`
@@ -142,6 +144,8 @@ Examples:
 * `add n/Betsy Crowe a/Newgate Prison p/12345678 t/BUYER`
 * `add n/Alex Yeoh p/87438807 e/alexyeoh@example.com a/Blk 30 Geylang Street 29, #06-40 d/Looking for apartment near city`
 
+<img src="images/addExample.png" width="700" />
+
 ---
 
 ### Editing a person: `edit`
@@ -158,7 +162,7 @@ Parameters:
 * `a/` : Address of the new contact [optional] (*Must be 1-255 characters, or empty to represent no address*)
 * `d/` : Details of the new contact [optional] (*Must be under 512 characters, or empty to represent no details*)
 * `t/` : Tags of the new contact [optional] (*Valid tags: "Renter", "Landlord", "Buyer", "Seller"*)
-S
+
 Behavior:
 * The index field is mandatory and **must be a positive integer smaller than the number of contacts**.
 * At least one of the fields must be provided.
@@ -176,6 +180,8 @@ Examples:
 *  `edit 3 d/` Clears the details of the 3rd person.
 *  `edit 4 e/` Clears the email of the 4th person.
 *  `edit 5 a/` Clears the address of the 5th person.
+
+<img src="images/editExample.png" width="700" />
 
 #### **Important Notes:**
 - If you want to change a specific field, **remember to have a white space before the prefix**
@@ -315,7 +321,6 @@ Examples:
 * `meeting 3 Today 2359` Adds meeting for today at 11:59 PM
 * `meeting 4 Monday 9am` Adds meeting for next Monday at 9:00 AM
 * `meeting 1 clear` Clears meeting for 1st person
-
 ---
 
 ### Deleting a person : `delete`
