@@ -20,14 +20,47 @@ Built for agents who value speed, reliability, and control, CLIentTracker helps 
 in fast-paced environments.
 
 ## :page_facing_up: Contents
-- [:rocket: Quick Start](QuickStart.html)
+- [:rocket: Quick Start](#quick-start)
 - [:clipboard: Command Summary](#command-summary)
 - [:gear: Features](#features)
 - [:question: FAQ](#faq)
 - [:warning: Known Issues](#known-issues)
 
 ---
-Need help getting started fast? Head to the dedicated [Quick Start guide](QuickStart.html) for installation and your first commands.
+## :rocket: Quick Start
+{: #quick-start }
+
+CLIentTracker is a desktop CRM designed for property agents who prefer working quickly from the command line while
+still having a clean desktop interface.
+
+### Installation
+
+1. Ensure you have Java `17` or above installed on your computer.<br>
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+
+1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+
+1. Copy the file to the folder you want to use as the _home folder_ for your CLIentTracker.
+
+1. Open the folder where your CLIentTracker is currently located, double click to run CLIentTracker and a User Interface similar to the one below should appear in a few seconds with some sample data loaded.<br>
+   ![Ui](images/Ui.png)
+
+### Try It Out
+
+1. Type commands into the command box and press Enter to execute them.
+
+1. Try these example commands:
+
+   * `list` to list all contacts
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` to add a contact
+   * `delete 3` to delete the 3rd displayed contact
+   * `clear` to delete all contacts
+   * `find n/John` to search for contacts by name
+   * `exit` to close the application
+
+1. Continue with the sections below for full command details, or jump straight to the [Command Summary](#command-summary).
+
+Want to start fresh? Use `clear` and confirm with `y` to remove the sample contacts and begin with an empty contact list.
 
 ---
 ## :clipboard: Command Summary
@@ -63,7 +96,7 @@ Action | Description                                                    | Format
 **Delete** | [Deletes a person](#deleting-a-person--delete)                 | `delete PHONE`<br> e.g., `delete 91234567`
 **Clear** | [Clears all entries](#clearing-all-entries--clear)             | `clear`
 **Mark** | [Adds contact into favourites](#favourites-mark-and-unmark)    | `mark INDEX` <br> Example: `mark 1`
-**Unmark** | [Removes contact from favourites](#favourites-mark-and-unmark) | `unmark INDEX` <br> Example: `mark 1`
+**Unmark** | [Removes contact from favourites](#favourites-mark-and-unmark) | `unmark INDEX` <br> Example: `unmark 1`
 **Meeting** | [Adds or clears a meeting for a contact](#adding-a-meeting-meeting)  | `meeting INDEX DATE_TIME` or `meeting INDEX clear` <br> Example: `meeting 1 mon 2pm`
 **Undo** | [Undo previous changes](#undo)                                 | `undo`
 **List** | [Lists all persons](#listing-all-persons-list)                 | `list`
@@ -98,7 +131,7 @@ Behavior:
 * If a contact with the same phone number already exists, the new contact will not be added.
 * Name must be 1-50 characters and contain only alphanumeric characters and spaces.
 * Details will default to empty if parameter not used.
-* Details must not be over512 characters and cannot be empty.
+* Details must not be over 512 characters and cannot be empty.
 * Email will default to empty if parameter not used.
 * Email must be 2-254 characters if provided, or empty to represent no email.
 * Address will default to empty if parameter not used.
@@ -106,7 +139,7 @@ Behavior:
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe a/Newgate Prison p/1234567 t/BUYER`
+* `add n/Betsy Crowe a/Newgate Prison p/12345678 t/BUYER`
 * `add n/Alex Yeoh p/87438807 e/alexyeoh@example.com a/Blk 30 Geylang Street 29, #06-40 d/Looking for apartment near city`
 
 ---
@@ -144,6 +177,12 @@ Examples:
 *  `edit 4 e/` Clears the email of the 4th person.
 *  `edit 5 a/` Clears the address of the 5th person.
 
+#### **Important Notes:**
+- If you want to change a specific field, **remember to have a white space before the prefix**
+  - ❌ `edit 1 a/yishunp/12345678`
+  - ✅ `edit 1 a/yishun p/12345678`
+  - ✅ `edit 1 d/want Sentosa/Yishun`
+
 ---
 
 ### Locating persons: `find`
@@ -168,7 +207,7 @@ Search for persons using keywords across all fields or within specific fields.
 > - Prefixes are **case-sensitive** and must be in lowercase
     >   - ❌ `N/Alex` is invalid
 >   - ✅ `n/Alex` is valid
-> - Prefixes must appear at the **start** of the input or be **preceded by a space**
+> - Prefixes must be **preceded by a space**
     >   - ❌ `find n/Alexp/1234`
 >   - ✅ `find n/Alex p/1234`
 
@@ -381,6 +420,9 @@ There is **no need to press a save button**. Everything is stored locally on you
 All data is stored in:
 
 `[CLIentTracker file location]/data/addressbook.json`
+
+CLIentTracker is intended for **medium to moderately large contact lists**. Performance may degrade for very large
+datasets, especially above **50,000 to 100,000 contacts**, depending on your device's memory and CPU.
 
 ---
 
