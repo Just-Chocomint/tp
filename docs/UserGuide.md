@@ -315,17 +315,11 @@ Format: `meeting INDEX DATE_TIME` or `meeting INDEX clear`
 - When using (day month) format, avoid using (24-hour format)
   - `20 april 2359` will result in year 2359; Instead use `20 april 11:59`
 
-Examples:
-* `meeting 1 25/03/2030 14:30` Adds meeting for 1st person
-* `meeting 2 15 Mar 2030 4pm` Adds meeting for 2nd person
-* `meeting 3 Today 2359` Adds meeting for today at 11:59 PM
-* `meeting 4 Monday 9am` Adds meeting for next Monday at 9:00 AM
-* `meeting 1 clear` Clears meeting for 1st person
 ---
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from Client Tracker.
+Deletes the specified person from CLIentTracker.
 
 Format: `delete PHONE`
 
@@ -335,14 +329,14 @@ Format: `delete PHONE`
   * Confirm with y/n after delete command was entered
 
 Examples:
-* `delete 91234567` deletes the person with said phone number in Client Tracker.
+* `delete 91234567` deletes the person with said phone number in CLIentTracker.
 * `delete 912` is invalid and will throw a error message
 
 ---
 
 ### Clearing all entries : `clear`
 
-Deletes all entries from Client Tracker, including favourites. 
+Deletes all entries from CLIentTracker, including favourites. 
 * Confirm with y/n after clear command was entered
 
 Format: `clear`
@@ -367,7 +361,7 @@ Examples:
 ### Undo previous changes: `undo`
 {: #undo }
 
-Reverts the most recent change made to Client Tracker contacts.
+Reverts the most recent change made to CLIentTracker contacts.
 
 Format: `undo`
 
@@ -378,7 +372,7 @@ Format: `undo`
 
 ### Listing all persons: `list`
 
-Shows a list of all persons in Client Tracker.
+Shows a list of all persons in CLIentTracker.
 
 Format: `list`
 
@@ -415,7 +409,7 @@ Format: `exit`
 
 ### :floppy_disk: Data Storage & Saving
 
-Client Tracker is designed to be **fast and worry-free** — your data is automatically saved after every command.
+CLIentTracker is designed to be **fast and worry-free** — your data is automatically saved after every command.
 
 There is **no need to press a save button**. Everything is stored locally on your device, allowing you to:
 - Work completely offline
@@ -433,11 +427,11 @@ datasets, especially above **50,000 to 100,000 contacts**, depending on your dev
 
 ### :pencil2: Editing the data file
 
-Client Tracker data are saved automatically as a JSON file `[CLIentTracker file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+CLIentTracker data are saved automatically as a JSON file `[CLIentTracker file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" cl ass="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Client Tracker will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause Client Tracker to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, CLIentTracker will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause CLIentTracker to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 
@@ -447,7 +441,7 @@ Furthermore, certain edits can cause Client Tracker to behave in unexpected ways
 {: #faq }
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data from your previous Client Tracker home folder.
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data from your previous CLIentTracker home folder.
 
 ---
 
