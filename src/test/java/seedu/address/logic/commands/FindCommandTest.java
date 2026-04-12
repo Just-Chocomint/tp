@@ -72,10 +72,9 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        SearchPersonForKeyword predicate = preparePredicate("Kurz Elle Kunz");
+        SearchPersonForKeyword predicate = preparePredicate("Kurz, Elle, Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
@@ -103,6 +102,6 @@ public class FindCommandTest {
 
         return new SearchPersonForKeyword(
                 Map.of(SearchPersonForKeyword.GENERAL_KEY,
-                        Arrays.asList(trimmedInput.split("\\s+"))));
+                        Arrays.asList(trimmedInput.split("\\s*,\\s*"))));
     }
 }

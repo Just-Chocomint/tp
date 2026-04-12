@@ -12,11 +12,13 @@ public class GeneralContainsKeywordPredicate extends ObjectContainsKeywordsPredi
     }
 
     @Override
-    protected String getFieldValue(Person person) {
-        return person.getName().fullName + " "
-                + person.getPhone().value + " "
-                + person.getEmail().value + " "
-                + person.getAddress().value + " "
-                + person.getDetails().value;
+    protected List<String> getFieldValue(Person person) {
+        return List.of(
+                person.getName().fullName,
+                person.getPhone().value,
+                person.getEmail().value,
+                person.getAddress().value,
+                person.getDetails().value
+        );
     }
 }

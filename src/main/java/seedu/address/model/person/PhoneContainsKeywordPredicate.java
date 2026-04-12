@@ -12,7 +12,7 @@ public class PhoneContainsKeywordPredicate extends ObjectContainsKeywordsPredica
     }
 
     @Override
-    protected String getFieldValue(Person person) {
-        return person.getPhone().value;
+    protected List<String> getFieldValue(Person person) {
+        return List.of(person.getPhone().value);
     }
 }

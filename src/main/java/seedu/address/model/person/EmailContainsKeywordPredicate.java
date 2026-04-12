@@ -12,7 +12,7 @@ public class EmailContainsKeywordPredicate extends ObjectContainsKeywordsPredica
     }
 
     @Override
-    protected String getFieldValue(Person person) {
-        return person.getEmail().value;
+    protected List<String> getFieldValue(Person person) {
+        return List.of(person.getEmail().value);
     }
 }

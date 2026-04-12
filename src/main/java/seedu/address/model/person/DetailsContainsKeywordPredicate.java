@@ -12,7 +12,7 @@ public class DetailsContainsKeywordPredicate extends ObjectContainsKeywordsPredi
     }
 
     @Override
-    protected String getFieldValue(Person person) {
-        return person.getDetails().value;
+    protected List<String> getFieldValue(Person person) {
+        return List.of(person.getDetails().value);
     }
 }

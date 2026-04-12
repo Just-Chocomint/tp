@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -25,8 +26,8 @@ public class ObjectContainsKeywordsPredicateTest {
         }
 
         @Override
-        protected String getFieldValue(TestObject object) {
-            return object.value;
+        protected List<String> getFieldValue(TestObject object) {
+            return Collections.singletonList(object.value);
         }
     }
 

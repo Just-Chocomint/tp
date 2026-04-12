@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.FindCommand;
@@ -18,6 +19,8 @@ import seedu.address.model.person.SearchPersonForKeyword;
 public class FindCommandParser implements Parser<FindCommand> {
 
     private static final String PREFIX_REGEX = "(?=(^|\\s)[a-zA-Z]/)";
+    private static final List<String> ALLOWED_TAGS =
+            List.of("buyer", "seller", "landlord", "renter");
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -70,7 +73,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         Map<String, List<String>> fieldMap = new HashMap<>();
 
         Pattern anyPrefixPattern = Pattern.compile("(^|\\s)[a-zA-Z]/");
-        Pattern invalidPrefixPattern = Pattern.compile("(^|\\s)[^npaed\\s]/");
+        Pattern invalidPrefixPattern = Pattern.compile("(^|\\s)[^npaedt\\s]/");
 
         boolean hasAnyPrefixPattern = anyPrefixPattern.matcher(input).find();
         boolean hasInvalidPrefix = invalidPrefixPattern.matcher(input).find();
@@ -80,7 +83,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        if (hasAnyPrefixPattern && !input.matches("^[npaed]/.*")) {
+        if (hasAnyPrefixPattern && !input.matches("^[npaedt]/.*")) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -119,11 +122,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (part.isEmpty()) {
                 continue;
             }
-            if (!part.matches("[npaed]/.*")) {
+            if (!part.matches("[npaedt]/.*")) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
-
             String prefix = part.substring(0, 2);
             String value = part.substring(2).trim();
             String[] values = value.split(",");
@@ -139,7 +141,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
-
             addTaggedValues(fieldMap, prefix, value);
         }
     }
@@ -156,15 +157,22 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @param key The prefix key (e.g. {@code "n/"}).
      * @param raw The raw string containing comma-separated values.
      */
-    private void addTaggedValues(Map<String, List<String>> fieldMap, String key, String raw) {
-        String[] values = raw.split(",");
+    private void addTaggedValues(Map<String, List<String>> fieldMap, String key, String raw)
+            throws ParseException {
+        String[] values = raw.split(",", -1);
         fieldMap.putIfAbsent(key, new ArrayList<>());
 
         for (String value : values) {
             String cleaned = value.trim();
-            if (!cleaned.isEmpty()) {
-                fieldMap.get(key).add(cleaned);
+
+            if (cleaned.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
+
+            validateKeyword(cleaned);
+            validateTagKeyword(key, cleaned);
+            fieldMap.get(key).add(cleaned);
         }
     }
 
@@ -179,17 +187,52 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @param fieldMap The map storing prefixes and their associated keyword lists.
      * @param raw The raw string containing whitespace-separated values.
      */
-    private void addGeneralValues(Map<String, List<String>> fieldMap, String raw) {
-        String[] values = raw.split(",");
-
+    private void addGeneralValues(Map<String, List<String>> fieldMap, String raw)
+            throws ParseException {
+        String[] values = raw.split(",", -1);
         fieldMap.putIfAbsent(SearchPersonForKeyword.GENERAL_KEY, new ArrayList<>());
 
         for (String value : values) {
             String cleaned = value.trim();
 
-            if (!cleaned.isEmpty()) {
-                fieldMap.get(SearchPersonForKeyword.GENERAL_KEY).add(cleaned);
+            if (cleaned.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
             }
+
+            validateKeyword(cleaned);
+            fieldMap.get(SearchPersonForKeyword.GENERAL_KEY).add(cleaned);
+        }
+    }
+
+    /**
+     * Validates that the given keyword contains at least one alphanumeric character.
+     *
+     * <p>This prevents inputs that consist solely of punctuation or whitespace,
+     * which are considered invalid as they do not provide meaningful search value.
+     *
+     * @param cleaned The trimmed keyword to validate.
+     * @throws ParseException If the keyword does not contain any letter or digit.
+     */
+    private void validateKeyword(String cleaned) throws ParseException {
+        if (!cleaned.matches(".*[a-zA-Z0-9].*")) {
+            throw new ParseException("Keywords must contain at least one letter or number.");
+        }
+    }
+
+    /**
+     * Validates that the given keyword is a valid tag value when the prefix is {@code t/}.
+     *
+     * <p>If the prefix corresponds to tags, the keyword must match one of the predefined
+     * allowed tag values (case-insensitive). Otherwise, no validation is performed.
+     *
+     * @param key The prefix associated with the keyword (e.g., {@code "t/"}).
+     * @param cleaned The trimmed keyword to validate.
+     * @throws ParseException If the keyword is not a valid tag value for the {@code t/} prefix.
+     */
+    private void validateTagKeyword(String key, String cleaned) throws ParseException {
+        if (Objects.equals(key, "t/") && !ALLOWED_TAGS.contains(cleaned.toLowerCase())) {
+            throw new ParseException("Tag values must be Buyer, Seller, Landlord, or Renter");
         }
     }
 }

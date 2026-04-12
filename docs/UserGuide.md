@@ -5,7 +5,7 @@ toc: true
 toc_label: "On this page"
 toc_icon: "list"
 ---
-CLIentTracker is a desktop CRM designed for property agents, optimized for use via a Command Line Interface (CLI) while
+CLIentTracker is a desktop Customer Relationship Management (CRM) designed for property agents, optimized for use via a Command Line Interface (CLI) while
 retaining a clean and simple visual interface. It enables efficient management of clients, property listings, notes, and
 meetings through commands such as add, edit, find, and list, allowing users to update and retrieve information faster
 than traditional GUI-based systems. For agents who are comfortable with typing, this significantly improves productivity
@@ -196,11 +196,12 @@ Examples:
 Search for persons using keywords across all fields or within specific fields.
 
 #### **Format:**
-- General search:
-  `find KEYWORD...`
+- General search:  
+  `find KEYWORD[, KEYWORD]...`
 
-- Field-specific search:
-  `find PREFIX/KEYWORD PREFIX/KEYWORD...`
+- Field-specific search:  
+  `find PREFIX/KEYWORD[, KEYWORD] PREFIX/KEYWORD[, KEYWORD]...`
+
 
 **Prefixes:**
 - `n/` — name
@@ -208,17 +209,12 @@ Search for persons using keywords across all fields or within specific fields.
 - `a/` — address
 - `e/` — email
 - `d/` — details
+- `t/` — tags
 
-> ⚠️ Prefix rules:
-> - Prefixes are **case-sensitive** and must be in lowercase
-    >   - ❌ `N/Alex` is invalid
->   - ✅ `n/Alex` is valid
-> - Prefixes must be **preceded by a space**
-    >   - ❌ `find n/Alexp/1234`
->   - ✅ `find n/Alex p/1234`
 
 #### **General Search:**
-- Searches across **all fields**
+- Searches across **name, phone, address, email, and details**
+- ❗ Does **not** search through tags
 - Case-insensitive (`alex` = `Alex`)
 - Supports partial matches (`lex` → `Alex`)
 - Keywords are **comma-separated**
@@ -240,22 +236,47 @@ Search for persons using keywords across all fields or within specific fields.
 **Examples:**
 - `find n/Alex`
 - `find p/9876`
+- `find t/buyer`
 - `find n/Alex, Bob p/9123`
+- `find t/buyer, seller`
 
 
 #### **Rules:**
 - Keywords within the same prefix use **OR**
-  - `find n/Alex, Bob` → name contains *Alex* or *Bob*
+    - `find n/Alex, Bob` → name contains *Alex* or *Bob*
+
 - Different prefixes use **AND**
-  - `find n/Alex p/9123` → name contains *Alex* AND phone contains *9123*
+    - `find n/Alex p/9123` → name contains *Alex* AND phone contains *9123*
 
+> 💡 More Prefix rules:
+>- Prefixes are **case-sensitive** and must be in lowercase
+  >  - ❌ `N/Alex` is invalid
+  >  - ✅ `n/Alex` is valid
+>
+> - Prefixes must be **preceded by a space**
+  >   - ⚠️ `find n/Alexp/1234`, otherwise **assumed** to be a keyword
+  >   - ✅ `find n/Alex p/1234`
+>
+> - If prefixes are **not properly separated**, they are treated as part of the same field
+  >   - `find n/Alexp/1234` is interpreted as searching for the name `"Alexp/1234"`
 
-#### **Important Notes:**
+### **⚠️Important Notes:**
 - You **cannot mix general search and prefix search**
   - ❌ `find alex p/9876`
-- Commas are required if you want to separate multiple keywords
-  - ❌ `find n/Alex Bob` 
+
+- Commas are required if you want to separate multiple keywords, otherwise it's ok
+  - ⚠️ `find n/Alex Bob`, this is **okay** if searching for "Alex Bob"
   - ✅ `find n/Alex, Bob`
+
+- To search by tags, you must use the `t/` prefix
+  - ⚠️ `find buyer`, this is **okay** if searching for "buyer" not in tag
+  - ✅ `find t/buyer`
+
+- Keywords must contain at least one letter or number
+  - ❌ `find !!!`
+  - ❌ `find n/@@@`
+  - ✅ `find alex123`
+  - ✅ `find #02-25`
 
 
 ---

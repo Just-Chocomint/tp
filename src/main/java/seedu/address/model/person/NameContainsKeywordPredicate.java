@@ -12,7 +12,7 @@ public class NameContainsKeywordPredicate extends ObjectContainsKeywordsPredicat
     }
 
     @Override
-    protected String getFieldValue(Person person) {
-        return person.getName().fullName;
+    protected List<String> getFieldValue(Person person) {
+        return List.of(person.getName().fullName);
     }
 }

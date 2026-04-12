@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * contains any of the given keywords.
  *
  * <p>Subclasses are required to implement {@link #getFieldValue(Object)}
- * to specify which field of the object should be evaluated.
+ * to specify which field(s) of the object should be evaluated.
  *
  * @param <T> The type of object to be tested.
  */
@@ -22,51 +22,50 @@ public abstract class ObjectContainsKeywordsPredicate<T> implements Predicate<T>
      * Constructs an {@code ObjectContainsKeywordsPredicate} with the specified keywords.
      *
      * <p>The keywords are used to perform case-insensitive substring matching
-     * against the target field value.
+     * against the target field value(s).
      *
-     * @param keywords A list of keywords to match against the object's field.
+     * @param keywords A list of keywords to match against the object's field(s).
      */
     public ObjectContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     /**
-     * Returns the string value of the field from the given object to be tested.
+     * Returns the string value(s) of the field from the given object to be tested.
      *
-     * <p>This method must be implemented by subclasses to define which field
-     * of the object is used for keyword matching.
+     * <p>This method must be implemented by subclasses to define which field(s)
+     * of the object are used for keyword matching.
      *
-     * @param object The object whose field value is to be retrieved.
-     * @return The string value of the relevant field.
+     * @param object The object whose field value(s) are to be retrieved.
+     * @return The string value(s) of the relevant field(s).
      */
-    protected abstract String getFieldValue(T object);
+    protected abstract List<String> getFieldValue(T object);
 
     /**
      * Evaluates whether the specified object contains any of the keywords
-     * in its target field.
+     * in its target field(s).
      *
      * <p>The comparison is case-insensitive and checks if any keyword is a
-     * substring of the field value.
-     *
-     * <p>If the field value is {@code null}, this method returns {@code false}.
+     * substring of any field value.
      *
      * @param object The object to test.
-     * @return {@code true} if at least one keyword matches the field value,
+     * @return {@code true} if at least one keyword matches any field value,
      *         {@code false} otherwise.
      */
     @Override
     public boolean test(T object) {
-        String fieldValue = getFieldValue(object);
-        if (fieldValue == null) {
+        List<String> fieldValues = getFieldValue(object);
+        if (fieldValues == null || fieldValues.isEmpty()) {
             return false;
         }
 
-        String lowerCaseFieldValue = fieldValue.toLowerCase();
-
-        return keywords.stream()
-                .filter(keyword -> keyword != null)
+        return fieldValues.stream()
+                .filter(Objects::nonNull)
                 .map(String::toLowerCase)
-                .anyMatch(lowerCaseFieldValue::contains);
+                .anyMatch(lowerCaseFieldValue -> keywords.stream()
+                        .filter(Objects::nonNull)
+                        .map(String::toLowerCase)
+                        .anyMatch(lowerCaseFieldValue::contains));
     }
 
     /**

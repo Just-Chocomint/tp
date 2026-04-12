@@ -99,6 +99,8 @@ public class SearchPersonForKeyword implements Predicate<Person> {
             return new DetailsContainsKeywordPredicate(keywords);
         case "e/":
             return new EmailContainsKeywordPredicate(keywords);
+        case "t/":
+            return new TagContainsKeywordPredicate(keywords);
         default:
             assert false : "Unexpected prefix: " + prefix;
             return null; // unreachable, but required for compilation
